@@ -1,0 +1,13 @@
+name: SpeedBuilder
+main: org.hessminecraft.noip.speedbuilder.SpeedBuilder
+version: 0.2
+
+commands:
+    speedbuilder:
+        description: Very fast building using Builder plugin
+        usage: Unknown command.  Try /<command> help to view available commands.
+        permission: <plugin name>.speedbuilder
+        permission-message: You don't have <permission>
+
+depend:
+  - Builder
