@@ -5,8 +5,15 @@ import java.util.Arrays;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import net.jrbudda.builder.*;
+import net.citizensnpcs.*;
+import net.citizensnpcs.api.*;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.npc.NPCRegistry;
+import net.citizensnpcs.api.trait.Trait;
 
 public final class SpeedBuilder extends JavaPlugin {
 	
@@ -15,6 +22,7 @@ public final class SpeedBuilder extends JavaPlugin {
 	private boolean ran = false;
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
+		
 		if(cmd.getName().equalsIgnoreCase("speedbuilder")){
 			if(!(sender instanceof Player)){
 				sender.sendMessage(ChatColor.RED + "This command can only be run by a player.");
@@ -194,6 +202,19 @@ public final class SpeedBuilder extends JavaPlugin {
 				player.sendMessage(ChatColor.GREEN + "Build cancelled.");
 				return true;
 			}
+			if (args[0].equalsIgnoreCase("new")){
+				NPC first = spawnNPC("aaaaaaaa");
+				first.addTrait(BuilderTrait.class);
+				Builder builder = new Builder();
+				BuilderTrait trait = builder.getBuilder(first);
+				if (trait != null){
+					player.sendMessage("We have a builder!");
+				}else{
+					player.sendMessage("No Dice.");
+				}
+				
+				return true;
+			}
 		}
 		return false;
 	}
@@ -207,5 +228,9 @@ public final class SpeedBuilder extends JavaPlugin {
 			toReturn += options[i];
 		}
 		return toReturn;
+	}
+	
+	private NPC spawnNPC(String name) {
+		return CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, name);
 	}
 }
