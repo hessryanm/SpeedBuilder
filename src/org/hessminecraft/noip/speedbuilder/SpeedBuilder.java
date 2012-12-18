@@ -22,7 +22,7 @@ public final class SpeedBuilder extends JavaPlugin {
 	private boolean ran = false;
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-		
+		 
 		if(cmd.getName().equalsIgnoreCase("speedbuilder")){
 			if(!(sender instanceof Player)){
 				sender.sendMessage(ChatColor.RED + "This command can only be run by a player.");
